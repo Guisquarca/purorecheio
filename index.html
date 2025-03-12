@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puro Recheio - Pastéis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img src="erasebg-transformed.png" alt="Logo Puro Recheio" class="logo">
+            <h1>Puro Recheio</h1>
+        </div>
+    </header>
+
+    <div class="cart-button">
+        <button id="cartBtn">🛒 Carrinho (<span id="cartCount">0</span>)</button>
+    </div>
+
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <button class="close-cart" onclick="toggleCart()">X</button>
+            <h2>Seu Carrinho</h2>
+            <div id="cartItems"></div>
+            <div class="cart-total">
+                <h3>Total: R$ <span id="cartTotal">0.00</span></h3>
+                <button id="addressBtn" onclick="showAddressForm()">Informar Endereço</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="address-modal" id="addressModal">
+        <div class="address-content">
+            <button class="close-address" onclick="closeAddressForm()">X</button>
+            <h2>Seu Endereço</h2>
+            <form id="addressForm" onsubmit="validateAddress(event)">
+                <div class="form-group">
+                    <label for="street">Rua:</label>
+                    <input type="text" id="street" required>
+                </div>
+                <div class="form-group">
+                    <label for="number">Número:</label>
+                    <input type="text" id="number" required>
+                </div>
+                <div class="form-group">
+                    <label for="neighborhood">Bairro:</label>
+                    <select id="neighborhood" required>
+                        <option value="">Selecione o bairro</option>
+                        <option value="macarana">Macaranã</option>
+                        <option value="caicara">Caiçara</option>
+                        <option value="mirim">Mirim</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="city">Cidade:</label>
+                    <input type="text" id="city" value="Praia Grande" readonly>
+                </div>
+                <button type="submit">Confirmar Endereço</button>
+            </form>
+            <p id="addressError" class="error-message"></p>
+        </div>
+    </div>
+
+    <main>
+        <section class="pasteis">
+            <h2>Nossos Pastéis</h2>
+            <div class="pasteis-grid">
+                <div class="pastel-item">
+                    <img src="images/carne.jpg" alt="Pastel de Carne">
+                    <h3>Carne/Carne com Queijo</h3>
+                    <p>R$ 12,00</p>
+                    <button onclick="addToCart('Carne/Carne com Queijo', 12.00)">Adicionar ao Carrinho</button>
+                </div>
+                <div class="pastel-item">
+                    <img src="images/frango.jpg" alt="Pastel de Frango">
+                    <h3>Frango</h3>
+                    <p>R$ 12,00</p>
+                    <button onclick="addToCart('Frango', 12.00)">Adicionar ao Carrinho</button>
+                </div>
+                <div class="pastel-item">
+                    <img src="images/frango-requeijao.jpg" alt="Pastel de Frango com Requeijão">
+                    <h3>Frango e Requeijão</h3>
+                    <p>R$ 12,00</p>
+                    <button onclick="addToCart('Frango e Requeijão', 12.00)">Adicionar ao Carrinho</button>
+                </div>
+                <div class="pastel-item">
+                    <img src="images/calabresa.jpg" alt="Pastel de Calabresa">
+                    <h3>Calabresa</h3>
+                    <p>R$ 12,00</p>
+                    <button onclick="addToCart('Calabresa', 12.00)">Adicionar ao Carrinho</button>
+                </div>
+                <div class="pastel-item">
+                    <img src="images/calabresa-requeijao.jpg" alt="Pastel de Calabresa com Requeijão">
+                    <h3>Calabresa e Requeijão</h3>
+                    <p>R$ 12,00</p>
+                    <button onclick="addToCart('Calabresa e Requeijão', 12.00)">Adicionar ao Carrinho</button>
+                </div>
+                <div class="pastel-item">
+                    <img src="images/calabresa-queijo.jpg" alt="Pastel de Calabresa com Queijo">
+                    <h3>Calabresa e Queijo</h3>
+                    <p>R$ 12,00</p>
+                    <button onclick="addToCart('Calabresa e Queijo', 12.00)">Adicionar ao Carrinho</button>
+                </div>
+                <div class="pastel-item">
+                    <img src="images/queijo.jpg" alt="Pastel de Queijo/Pizza/Bauru">
+                    <h3>Queijo/Pizza/Bauru</h3>
+                    <p>R$ 12,00</p>
+                    <button onclick="addToCart('Queijo/Pizza/Bauru', 12.00)">Adicionar ao Carrinho</button>
+                </div>
+                <div class="pastel-item">
+                    <img src="images/dois-queijos.jpg" alt="Pastel de 2 Queijos">
+                    <h3>2 Queijos</h3>
+                    <p>R$ 12,00</p>
+                    <button onclick="addToCart('2 Queijos', 12.00)">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="bebidas">
+            <h2>Bebidas</h2>
+            <div class="bebidas-grid">
+                <div class="bebida-item">
+                    <img src="images/coca-600.jpg" alt="Coca-Cola 600ml">
+                    <h3>Coca-Cola 600ml</h3>
+                    <p>R$ 7,50</p>
+                    <button onclick="addToCart('Coca-Cola 600ml', 7.50)">Adicionar ao Carrinho</button>
+                </div>
+                <div class="bebida-item">
+                    <img src="images/guarana-600.jpg" alt="Guaraná 600ml">
+                    <h3>Guaraná 600ml</h3>
+                    <p>R$ 6,50</p>
+                    <button onclick="addToCart('Guaraná 600ml', 6.50)">Adicionar ao Carrinho</button>
+                </div>
+                <div class="bebida-item">
+                    <img src="images/dolly-350.jpg" alt="Dolly 350ml">
+                    <h3>Dolly 350ml</h3>
+                    <p>R$ 3,50</p>
+                    <button onclick="addToCart('Dolly 350ml', 3.50)">Adicionar ao Carrinho</button>
+                </div>
+                <div class="bebida-item">
+                    <img src="images/coca-200.jpg" alt="Coca-Cola 200ml">
+                    <h3>Coca-Cola 200ml</h3>
+                    <p>R$ 3,50</p>
+                    <button onclick="addToCart('Coca-Cola 200ml', 3.50)">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="confirm-modal" id="confirmModal">
+        <div class="confirm-content">
+            <h3>Confirmar Adição</h3>
+            <p>Deseja adicionar este item ao carrinho?</p>
+            <div class="confirm-buttons">
+                <button onclick="confirmAdd()">Sim</button>
+                <button onclick="cancelAdd()">Não</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
