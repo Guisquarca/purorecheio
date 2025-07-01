@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalhe Conosco - MDG Assessoria</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .trabalhe-title {
+            color: #FFD700;
+            text-shadow: 0 0 18px #FFD700, 0 0 32px #fffbe6;
+            font-size: 2.1rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 3rem 0 2.2rem 0;
+            line-height: 1.3;
+        }
+        .trabalhe-card {
+            background: linear-gradient(145deg, #181818 80%, #232323 100%);
+            border: 2px solid #FFD700;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(212,175,55,0.10), 0 1.5px 0 #FFD700;
+            max-width: 440px;
+            margin: 0 auto 3rem auto;
+            padding: 2.5rem 2rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+        .trabalhe-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .trabalhe-form label {
+            color: #FFD700;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        .trabalhe-form input, .trabalhe-form textarea {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            border: 1.5px solid #FFD700;
+            background: #232323;
+            color: #FFD700;
+            font-size: 1.1rem;
+            outline: none;
+            margin-bottom: 0.2rem;
+            resize: none;
+        }
+        .trabalhe-form input:focus, .trabalhe-form textarea:focus {
+            border-color: #fffbe6;
+        }
+        .trabalhe-btn {
+            background: linear-gradient(45deg, #00ff7b, #00c853);
+            color: #181818;
+            border: none;
+            border-radius: 8px;
+            padding: 0.9rem 1.7rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 18px 0 #00ff7b99, 0 0px 0 #FFD700;
+            margin-top: 1.2rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px #fffbe6;
+        }
+        .trabalhe-btn:hover {
+            background: linear-gradient(45deg, #00ffb0, #00e676);
+            color: #000;
+            box-shadow: 0 4px 24px 0 #00ff7bcc;
+        }
+        @media (max-width: 600px) {
+            .trabalhe-card {
+                max-width: 98vw;
+                padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+            }
+            .trabalhe-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hexagon-background" id="hexagonBackground"></div>
+    <div id="main-content">
+        <header>
+            <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+            <h1 class="logo">MDG</h1>
+            <a href="index.html" class="login-btn"><i class="fas fa-home"></i> <span>Início</span></a>
+        </header>
+        <main>
+            <div class="trabalhe-title">
+                Venha Fazer a Diferença na MDG Assessoria Empresarial!<br><br>
+                <span style="font-weight:normal; color:#FFD700; text-shadow:0 0 10px #fffbe6; font-size:1.1rem;">
+                Se você busca um lugar onde seu talento é valorizado e sua paixão por resultados é celebrada, a MDG Assessoria Empresarial é o seu próximo passo! Estamos em busca de profissionais de todas as áreas que queiram inovar e crescer conosco. Seja você um profissional em Tecnologia, em RH, da Contabilidade, da área do direito, com conhecimentos em Inovação, Corretor com CRECI, saiba de Gestão Financeira ou em qualquer outra área que complemente o universo empresarial – temos um lugar para você. Venha fazer parte de um time que transforma desafios em oportunidades e constrói o futuro dos negócios!
+                </span>
+            </div>
+            <div class="trabalhe-card">
+                <form class="trabalhe-form" id="trabalheForm" onsubmit="return false;">
+                    <div>
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" maxlength="100" required>
+                    </div>
+                    <div>
+                        <label for="telefone">Telefone:</label>
+                        <input type="tel" id="telefone" maxlength="30" required>
+                    </div>
+                    <div>
+                        <label for="endereco">Endereço Residencial:</label>
+                        <input type="text" id="endereco" maxlength="200" required>
+                    </div>
+                    <div>
+                        <label for="email">Melhor Email:</label>
+                        <input type="email" id="email" maxlength="100" required>
+                    </div>
+                    <div>
+                        <label for="descricao">Breve descrição comercial (máx. 1500 caracteres):</label>
+                        <textarea id="descricao" maxlength="1500" rows="5" required></textarea>
+                    </div>
+                    <button class="trabalhe-btn" id="enviarTrabalhe" type="submit"><i class="fas fa-paper-plane"></i> Trabalhe Conosco</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <script>
+    document.getElementById('trabalheForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nome = document.getElementById('nome').value.trim();
+        const telefone = document.getElementById('telefone').value.trim();
+        const endereco = document.getElementById('endereco').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const descricao = document.getElementById('descricao').value.trim();
+        if (!nome || !telefone || !endereco || !email || !descricao) {
+            alert('Por favor, preencha todos os campos.');
+            return;
+        }
+        const mensagem =
+            `*Trabalhe Conosco - MDG Assessoria*\n` +
+            `Nome: ${nome}\n` +
+            `Telefone: ${telefone}\n` +
+            `Endereço: ${endereco}\n` +
+            `Email: ${email}\n` +
+            `Descrição Comercial: ${descricao}`;
+        const phone = '5511946162314';
+        const url = `https://wa.me/${phone}?text=${encodeURIComponent(mensagem)}`;
+        window.open(url, '_blank');
+    });
+    </script>
+</body>
+</html> 

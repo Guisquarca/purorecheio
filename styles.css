@@ -1,0 +1,971 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #000000;
+    color: #D4AF37;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Fundo com hexágonos */
+.hexagon-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background: #000000;
+}
+
+.hexagon {
+    position: absolute;
+    width: 70px;
+    height: 60.62px;
+    background: linear-gradient(145deg, #232323 60%, #181818 100%);
+    border: 2px solid rgba(212, 175, 55, 0.08);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    box-shadow: 0 2px 12px 0 rgba(255,255,255,0.04), 0 0 0 0 rgba(212,175,55,0);
+    transition: box-shadow 0.6s, border-color 0.6s, background 0.6s;
+    will-change: box-shadow, border-color, background;
+}
+
+.hexagon.lit {
+    background: linear-gradient(145deg, #232323 60%, #181818 100%);
+    border: 2px solid #FFD700;
+    box-shadow: 0 0 24px 8px rgba(212, 175, 55, 0.45), 0 0 60px 10px rgba(212, 175, 55, 0.18);
+    animation: hexagonGlowGold 1.5s ease-in-out;
+}
+
+@keyframes hexagonGlowGold {
+    0% {
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.0);
+        border-color: rgba(212, 175, 55, 0.08);
+    }
+    50% {
+        box-shadow: 0 0 32px 12px rgba(212, 175, 55, 0.55), 0 0 80px 20px rgba(212, 175, 55, 0.22);
+        border-color: #FFD700;
+    }
+    100% {
+        box-shadow: 0 0 24px 8px rgba(212, 175, 55, 0.45), 0 0 60px 10px rgba(212, 175, 55, 0.18);
+        border-color: #FFD700;
+    }
+}
+
+/* Conteúdo Principal */
+#main-content {
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+    will-change: transform, opacity;
+}
+
+/* Cabeçalho */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 0.5rem;
+    padding-right: 2rem;
+    position: relative;
+    height: 120px;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        #D4AF37 20%, 
+        #FFD700 50%, 
+        #D4AF37 80%, 
+        transparent 100%);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.logo {
+    flex: 1;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 3.2rem;
+}
+
+/* Botão de Login */
+.login-btn {
+    margin-left: 1.5rem;
+    background: linear-gradient(45deg, #D4AF37, #FFD700);
+    color: #000000;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    will-change: transform, box-shadow;
+}
+
+.login-btn:hover {
+    background: linear-gradient(45deg, #FFD700, #D4AF37);
+    transform: translateY(-2px) scale(1.05) translateZ(0);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+.login-btn i {
+    font-size: 1.2rem;
+}
+
+/* Seção de Vídeo */
+.video-section {
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.video-title {
+    font-size: 2.5rem;
+    color: #D4AF37;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    position: relative;
+}
+
+.video-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.video-container {
+    max-width: 800px;
+    margin: 0 auto;
+    aspect-ratio: 16/9;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid #D4AF37;
+    position: relative;
+    background: linear-gradient(145deg, 
+        rgba(26, 26, 26, 0.9), 
+        rgba(10, 10, 10, 0.9));
+}
+
+.video-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #D4AF37;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.video-placeholder:hover {
+    background: linear-gradient(145deg, 
+        rgba(26, 26, 26, 0.95), 
+        rgba(10, 10, 10, 0.95));
+}
+
+.video-placeholder i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: #FFD700;
+    transition: all 0.3s ease;
+}
+
+.video-placeholder:hover i {
+    transform: scale(1.1);
+    color: #D4AF37;
+}
+
+.video-placeholder p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+#youtubeVideo {
+    border-radius: 13px;
+}
+
+/* Carrossel de Serviços */
+main {
+    padding: 3rem 2rem;
+    position: relative;
+}
+
+main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(212, 175, 55, 0.3) 20%, 
+        rgba(212, 175, 55, 0.6) 50%, 
+        rgba(212, 175, 55, 0.3) 80%, 
+        transparent 100%);
+}
+
+.services-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #D4AF37;
+    margin-bottom: 3rem;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    position: relative;
+}
+
+.services-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.services-carousel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.service-card {
+    background: linear-gradient(145deg, 
+        rgba(26, 26, 26, 0.9), 
+        rgba(10, 10, 10, 0.9));
+    border: 2px solid #D4AF37;
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    will-change: transform, box-shadow, border-color;
+    transform: translateZ(0);
+    transition: box-shadow 0.3s, z-index 0.3s;
+    z-index: 1;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.service-card:hover::before {
+    left: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-10px) translateZ(0);
+    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+    border-color: #FFD700;
+}
+
+.service-card.expanded {
+    z-index: 10;
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.25), 0 2px 16px rgba(0,0,0,0.25);
+    border-color: #FFD700;
+}
+
+.service-icon {
+    font-size: 3rem;
+    color: #D4AF37;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+    will-change: transform;
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.1) translateZ(0);
+}
+
+.service-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #D4AF37;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: #B8860B;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.gratis {
+    font-size: 0.9rem;
+    color: #32CD32;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.saiba-mais-btn {
+    background: linear-gradient(45deg, #D4AF37, #FFD700);
+    color: #000000;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    will-change: transform, box-shadow;
+}
+
+.saiba-mais-btn:hover {
+    background: linear-gradient(45deg, #FFD700, #D4AF37);
+    transform: scale(1.05) translateZ(0);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+}
+
+/* Modal menor, tipo subpágina flutuante */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.modal-content {
+    background: linear-gradient(145deg, rgba(26, 26, 26, 0.98), rgba(10, 10, 10, 0.98));
+    border: 2px solid #D4AF37;
+    border-radius: 15px;
+    width: 13rem;
+    height: 13rem;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(212, 175, 55, 0.25), 0 2px 16px rgba(0,0,0,0.2);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    padding: 1.2rem 1rem;
+}
+
+.close {
+    color: #D4AF37;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    transition: color 0.3s;
+    z-index: 2;
+}
+
+#modal-content {
+    margin-top: 1.5rem;
+    line-height: 1.5;
+    color: #D4AF37;
+    text-align: center;
+    font-size: 1rem;
+}
+
+#modal-content h2 {
+    color: #FFD700;
+    margin-bottom: 0.7rem;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+#modal-content p {
+    margin-bottom: 0.5rem;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+/* Seção do WhatsApp */
+.whatsapp-section {
+    text-align: center;
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.whatsapp-btn {
+    background: linear-gradient(45deg, #25D366, #128C7E);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 8px rgba(37, 211, 102, 0.2);
+    position: relative;
+    overflow: hidden;
+    will-change: transform, box-shadow;
+}
+
+.whatsapp-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.whatsapp-btn:hover::before {
+    left: 100%;
+}
+
+.whatsapp-btn:hover {
+    background: linear-gradient(45deg, #128C7E, #25D366);
+    transform: translateY(-3px) scale(1.05) translateZ(0);
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-btn:active {
+    transform: translateY(-1px) scale(1.02) translateZ(0);
+}
+
+.whatsapp-btn i {
+    font-size: 1.5rem;
+    animation: whatsappPulse 2s ease-in-out infinite;
+}
+
+@keyframes whatsappPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Modal de Login */
+.login-modal-content {
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-container h2 {
+    color: #D4AF37;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+.input-group label {
+    color: #D4AF37;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    padding: 0.8rem;
+    border: 2px solid #D4AF37;
+    border-radius: 8px;
+    background: rgba(10, 10, 10, 0.8);
+    color: #D4AF37;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #FFD700;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.entrar-btn {
+    background: linear-gradient(45deg, #D4AF37, #FFD700);
+    color: #000000;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    will-change: transform, box-shadow;
+}
+
+.entrar-btn:hover {
+    background: linear-gradient(45deg, #FFD700, #D4AF37);
+    transform: translateY(-2px) scale(1.05) translateZ(0);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+}
+
+.registrar-btn {
+    background: linear-gradient(45deg, #8A2BE2, #9370DB);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    box-shadow: 0 5px 20px rgba(138, 43, 226, 0.4);
+    will-change: transform, box-shadow;
+}
+
+.registrar-btn:hover {
+    background: linear-gradient(45deg, #9370DB, #8A2BE2);
+    transform: translateY(-2px) scale(1.05) translateZ(0);
+    box-shadow: 0 8px 25px rgba(138, 43, 226, 0.6);
+}
+
+/* Modal de Registro */
+.register-modal-content {
+    max-width: 600px;
+}
+
+.register-container h2 {
+    color: #D4AF37;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.register-form .input-group {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+}
+
+.register-form .input-group input {
+    padding: 1rem;
+    border: 2px solid #D4AF37;
+    border-radius: 8px;
+    background: rgba(10, 10, 10, 0.8);
+    color: #D4AF37;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.register-form .input-group input:focus {
+    outline: none;
+    border-color: #FFD700;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.registrar-final-btn {
+    background: linear-gradient(45deg, #D4AF37, #FFD700);
+    color: #000000;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+    will-change: transform, box-shadow;
+}
+
+.registrar-final-btn:hover {
+    background: linear-gradient(45deg, #FFD700, #D4AF37);
+    transform: translateY(-3px) scale(1.05) translateZ(0);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+}
+
+/* Modal de Erro */
+.error-modal-content {
+    max-width: 500px;
+    text-align: center;
+}
+
+.error-container h2 {
+    color: #FF6B6B;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+
+.error-container p {
+    color: #D4AF37;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Expansão animada do card de serviço */
+.service-description {
+    background: rgba(20, 20, 20, 0.98);
+    border: 2px solid #D4AF37;
+    border-radius: 12px;
+    margin-top: 1rem;
+    padding: 1rem 1.2rem;
+    color: #FFD700;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.10);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.3s;
+}
+
+.service-card.expanded .service-description {
+    padding: 1rem 1.2rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .logo {
+        font-size: 3rem;
+        letter-spacing: 0.3rem;
+    }
+    
+    .login-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    .video-title {
+        font-size: 2rem;
+    }
+    
+    .services-title {
+        font-size: 2rem;
+    }
+    
+    header {
+        height: 100px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .video-section {
+        padding: 2rem 1rem;
+    }
+    
+    .services-carousel {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .service-card {
+        padding: 1.5rem;
+    }
+    
+    .service-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .modal-content {
+        margin: 10% auto;
+        width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .whatsapp-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .hexagon {
+        width: 60px;
+        height: 52px;
+    }
+}
+
+@media (max-width: 480px) {
+    #main-content {
+        padding: 0;
+    }
+    
+    main {
+        padding: 2rem 1rem;
+    }
+    
+    .logo {
+        font-size: 2.5rem;
+        letter-spacing: 0.2rem;
+    }
+    
+    .login-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        gap: 5px;
+    }
+    
+    .video-title {
+        font-size: 1.8rem;
+    }
+    
+    .services-title {
+        font-size: 1.8rem;
+    }
+    
+    header {
+        height: 80px;
+    }
+    
+    .video-section {
+        padding: 1.5rem 1rem;
+    }
+    
+    .service-card {
+        padding: 1rem;
+    }
+    
+    .service-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .whatsapp-btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .hexagon {
+        width: 50px;
+        height: 43px;
+    }
+    
+    .modal-content {
+        width: 95vw;
+        height: auto;
+        min-height: 10rem;
+        padding: 1rem 0.5rem;
+    }
+    #modal-content {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .service-description {
+        padding: 0.7rem 0.5rem;
+        font-size: 0.95rem;
+    }
+    .side-drawer {
+        width: 85vw;
+        min-width: 220px;
+        max-width: 350px;
+        padding: 1.2rem 1rem 1rem 1rem;
+    }
+    .logo {
+        font-size: 2.1rem;
+    }
+    .menu-btn {
+        width: 38px;
+        height: 38px;
+        margin-right: 0.5rem;
+    }
+    .menu-bar {
+        width: 22px;
+        height: 3px;
+    }
+}
+
+/* Botão de menu hamburguer */
+.menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 6px;
+    width: 48px;
+    height: 48px;
+    margin-right: 1.5rem;
+    z-index: 20;
+}
+.menu-bar {
+    display: block;
+    width: 32px;
+    height: 4px;
+    background: linear-gradient(90deg, #FFD700 0%, #D4AF37 100%);
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+/* Drawer lateral */
+.side-drawer {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 300px;
+    height: 100vh;
+    background: rgba(10,10,10,0.98);
+    box-shadow: 4px 0 24px 0 rgba(212,175,55,0.15);
+    z-index: 1002;
+    transition: left 0.35s cubic-bezier(0.4,0,0.2,1);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+}
+.side-drawer.open {
+    left: 0;
+}
+.side-drawer ul {
+    list-style: none;
+    margin-top: 2rem;
+    padding: 0;
+}
+.side-drawer li {
+    margin-bottom: 2rem;
+}
+.side-drawer a {
+    color: #FFD700;
+    font-size: 1.3rem;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: color 0.2s;
+}
+.side-drawer a:hover {
+    color: #fffbe6;
+}
+.close-drawer {
+    background: none;
+    border: none;
+    color: #FFD700;
+    font-size: 2.2rem;
+    align-self: flex-end;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: color 0.2s;
+}
+.close-drawer:hover {
+    color: #fffbe6;
+}
+.drawer-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.45);
+    z-index: 1001;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+.drawer-backdrop.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Ajuste do cabeçalho para centralizar o logo com menu e login */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 0.5rem;
+    padding-right: 2rem;
+    position: relative;
+    height: 120px;
+}
+.logo {
+    flex: 1;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 3.2rem;
+}
+.login-btn {
+    margin-left: 1.5rem;
+}
+@media (max-width: 600px) {
+    .side-drawer {
+        width: 85vw;
+        min-width: 220px;
+        max-width: 350px;
+        padding: 1.2rem 1rem 1rem 1rem;
+    }
+    .logo {
+        font-size: 2.1rem;
+    }
+    .menu-btn {
+        width: 38px;
+        height: 38px;
+        margin-right: 0.5rem;
+    }
+    .menu-bar {
+        width: 22px;
+        height: 3px;
+    }
+}

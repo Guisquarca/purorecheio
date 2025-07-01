@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Lucros - MDG Assessoria</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .calc-card {
+            background: linear-gradient(145deg, #181818 80%, #232323 100%);
+            border: 2px solid #FFD700;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(212,175,55,0.10), 0 1.5px 0 #FFD700;
+            max-width: 420px;
+            margin: 4rem auto 0 auto;
+            padding: 2.5rem 2rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+        .calc-card h2 {
+            color: #FFD700;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            text-align: center;
+        }
+        .calc-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+        .calc-form label {
+            color: #FFD700;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        .calc-form input {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            border: 1.5px solid #FFD700;
+            background: #232323;
+            color: #FFD700;
+            font-size: 1.1rem;
+            outline: none;
+            margin-bottom: 0.2rem;
+        }
+        .calc-form input:focus {
+            border-color: #fffbe6;
+        }
+        .calc-btns {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .calc-btn {
+            background: linear-gradient(45deg, #FFD700, #D4AF37);
+            color: #181818;
+            border: none;
+            border-radius: 8px;
+            padding: 0.7rem 1.5rem;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            box-shadow: 0 2px 10px rgba(212,175,55,0.15);
+        }
+        .calc-btn:hover {
+            background: linear-gradient(45deg, #fffbe6, #FFD700);
+            color: #000;
+        }
+        .calc-result {
+            margin-top: 2rem;
+            background: rgba(212,175,55,0.08);
+            border-radius: 10px;
+            padding: 1.2rem 1rem;
+            color: #FFD700;
+            font-size: 1.1rem;
+            width: 100%;
+            text-align: center;
+            min-height: 2.5rem;
+        }
+        @media (max-width: 600px) {
+            .calc-card {
+                max-width: 98vw;
+                padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hexagon-background" id="hexagonBackground"></div>
+    <div id="main-content">
+        <header>
+            <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+            <h1 class="logo">MDG</h1>
+            <a href="index.html" class="login-btn"><i class="fas fa-home"></i> <span>Início</span></a>
+        </header>
+        <main>
+            <div class="calc-card">
+                <h2>Calculadora de Lucros</h2>
+                <form class="calc-form" id="calcForm" onsubmit="return false;">
+                    <div>
+                        <label for="gasto">Quanto você gasta por unidade (R$):</label>
+                        <input type="number" id="gasto" min="0" step="0.01" required>
+                    </div>
+                    <div>
+                        <label for="cobrado">Quanto você cobra por unidade (R$):</label>
+                        <input type="number" id="cobrado" min="0" step="0.01" required>
+                    </div>
+                    <div style="margin-top:0.5rem; color:#FFD700; font-size:1.1rem; text-align:center;">
+                        <span id="lucroPorcentagem">Lucro: -- %</span>
+                    </div>
+                    <div class="calc-btns">
+                        <button class="calc-btn" id="btnQtd" type="button"><i class="fas fa-layer-group"></i> Calcular por Quantidade</button>
+                        <button class="calc-btn" id="btnMeta" type="button"><i class="fas fa-bullseye"></i> Calcular por Meta de Lucro</button>
+                    </div>
+                </form>
+                <div class="calc-result" id="calcResult"></div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <script>
+    // Atualiza porcentagem de lucro automaticamente
+    const gastoInput = document.getElementById('gasto');
+    const cobradoInput = document.getElementById('cobrado');
+    const lucroPorcentagem = document.getElementById('lucroPorcentagem');
+    function atualizarLucro() {
+        const gasto = parseFloat(gastoInput.value);
+        const cobrado = parseFloat(cobradoInput.value);
+        if (!isNaN(gasto) && !isNaN(cobrado) && gasto > 0) {
+            const porcentagem = ((cobrado - gasto) / gasto) * 100;
+            lucroPorcentagem.textContent = `Lucro: ${porcentagem.toFixed(2)} %`;
+        } else {
+            lucroPorcentagem.textContent = 'Lucro: -- %';
+        }
+    }
+    gastoInput.addEventListener('input', atualizarLucro);
+    cobradoInput.addEventListener('input', atualizarLucro);
+
+    // Botão 1: Calcular por quantidade
+    document.getElementById('btnQtd').addEventListener('click', function() {
+        const gasto = parseFloat(gastoInput.value);
+        const cobrado = parseFloat(cobradoInput.value);
+        if (isNaN(gasto) || isNaN(cobrado) || gasto <= 0) {
+            document.getElementById('calcResult').textContent = 'Preencha corretamente os valores.';
+            return;
+        }
+        const qtd = prompt('Quantas unidades você vendeu ou quer vender?');
+        const unidades = parseInt(qtd);
+        if (isNaN(unidades) || unidades <= 0) {
+            document.getElementById('calcResult').textContent = 'Digite uma quantidade válida.';
+            return;
+        }
+        const totalGasto = gasto * unidades;
+        const totalRecebido = cobrado * unidades;
+        const lucroTotal = totalRecebido - totalGasto;
+        const porcentagem = ((cobrado - gasto) / gasto) * 100;
+        document.getElementById('calcResult').innerHTML =
+            `<b>Unidades:</b> ${unidades}<br>` +
+            `<b>Total Gasto:</b> R$ ${totalGasto.toFixed(2)}<br>` +
+            `<b>Total Recebido:</b> R$ ${totalRecebido.toFixed(2)}<br>` +
+            `<b>Lucro Total:</b> R$ ${lucroTotal.toFixed(2)}<br>` +
+            `<b>Lucro por unidade:</b> ${porcentagem.toFixed(2)} %`;
+    });
+
+    // Botão 2: Calcular por meta de lucro
+    document.getElementById('btnMeta').addEventListener('click', function() {
+        const gasto = parseFloat(gastoInput.value);
+        const cobrado = parseFloat(cobradoInput.value);
+        if (isNaN(gasto) || isNaN(cobrado) || gasto <= 0 || cobrado <= gasto) {
+            document.getElementById('calcResult').textContent = 'Preencha corretamente os valores (o valor cobrado deve ser maior que o gasto).';
+            return;
+        }
+        const meta = prompt('Qual valor de lucro você deseja atingir?');
+        const metaValor = parseFloat(meta);
+        if (isNaN(metaValor) || metaValor <= 0) {
+            document.getElementById('calcResult').textContent = 'Digite um valor de meta válido.';
+            return;
+        }
+        const lucroPorUnidade = cobrado - gasto;
+        const unidadesNecessarias = Math.ceil(metaValor / lucroPorUnidade);
+        document.getElementById('calcResult').innerHTML =
+            `<b>Meta de Lucro:</b> R$ ${metaValor.toFixed(2)}<br>` +
+            `<b>Lucro por unidade:</b> R$ ${lucroPorUnidade.toFixed(2)}<br>` +
+            `<b>Unidades necessárias:</b> <span style='color:#FFD700;font-weight:bold;'>${unidadesNecessarias}</span>`;
+    });
+    </script>
+</body>
+</html> 

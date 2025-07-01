@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights para seu negócio - MDG Assessoria</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="hexagon-background" id="hexagonBackground"></div>
+    <div id="main-content">
+        <header>
+            <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+            <h1 class="logo">MDG</h1>
+            <a href="index.html" class="login-btn"><i class="fas fa-home"></i> <span>Início</span></a>
+        </header>
+        <main>
+            <h2 class="services-title">Insights para Potencializar seu Negócio</h2>
+            <div class="services-carousel" id="insights-carousel">
+                <div class="service-card" data-insight="educacao-financeira">
+                    <div class="service-icon"><i class="fas fa-piggy-bank"></i></div>
+                    <h3>Aprender Educação Financeira</h3>
+                    <button class="saiba-mais-btn">SAIBA MAIS</button>
+                </div>
+                <div class="service-card" data-insight="ler-livros">
+                    <div class="service-icon"><i class="fas fa-book-reader"></i></div>
+                    <h3>Ler Livros para Ajudar na Concentração</h3>
+                    <button class="saiba-mais-btn">SAIBA MAIS</button>
+                </div>
+                <div class="service-card" data-insight="parcerias-locais">
+                    <div class="service-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>Fechar Parcerias com Comércios Locais</h3>
+                    <button class="saiba-mais-btn">SAIBA MAIS</button>
+                </div>
+                <div class="service-card" data-insight="relacionamento-banco">
+                    <div class="service-icon"><i class="fas fa-university"></i></div>
+                    <h3>Ter um Bom Relacionamento com o Banco</h3>
+                    <button class="saiba-mais-btn">SAIBA MAIS</button>
+                </div>
+                <div class="service-card" data-insight="inovar">
+                    <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Sempre Buscar Inovar</h3>
+                    <button class="saiba-mais-btn">SAIBA MAIS</button>
+                </div>
+                <div class="service-card" data-insight="ia-amiga">
+                    <div class="service-icon"><i class="fas fa-robot"></i></div>
+                    <h3>Ter a IA como Sua Amiga</h3>
+                    <button class="saiba-mais-btn">SAIBA MAIS</button>
+                </div>
+                <div class="service-card" data-insight="falar-nao">
+                    <div class="service-icon"><i class="fas fa-user-shield"></i></div>
+                    <h3>Saber Falar Não</h3>
+                    <button class="saiba-mais-btn">SAIBA MAIS</button>
+                </div>
+                <div class="service-card" data-insight="respeito-proximo">
+                    <div class="service-icon"><i class="fas fa-people-arrows"></i></div>
+                    <h3>Aprender Sobre Respeito ao Próximo</h3>
+                    <button class="saiba-mais-btn">SAIBA MAIS</button>
+                </div>
+                <div class="service-card" data-insight="direitos">
+                    <div class="service-icon"><i class="fas fa-balance-scale"></i></div>
+                    <h3>Entender Seus Direitos</h3>
+                    <button class="saiba-mais-btn">SAIBA MAIS</button>
+                </div>
+                <div class="service-card" data-insight="ultimas-noticias">
+                    <div class="service-icon"><i class="fas fa-newspaper"></i></div>
+                    <h3>Estudar as Últimas Notícias</h3>
+                    <button class="saiba-mais-btn">SAIBA MAIS</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <script>
+    // Dados dos insights
+    const insightsData = {
+        'educacao-financeira': {
+            title: 'Aprender Educação Financeira: O Poder de Decidir o Seu Futuro',
+            content: `Em um mundo onde o dinheiro move montanhas, entender de finanças não é mais um luxo, mas uma necessidade. Dominar a educação financeira é ter a chave para suas decisões mais importantes: seja para realizar aquele sonho, quitar dívidas ou construir um futuro sólido. Não se trata apenas de poupar, mas de saber investir, planejar e multiplicar o que você tem, com inteligência e autonomia.`
+        },
+        'ler-livros': {
+            title: 'Ler Livros para Ajudar na Concentração: Foco em Cada Página, Foco na Vida',
+            content: `No turbilhão de informações e distrações do dia a dia, a capacidade de se concentrar virou um superpoder. Pegar um livro não é só absorver conhecimento, é um treino diário para a mente. Cada página lida com atenção afia seu foco, melhora sua memória e te prepara para encarar desafios com mais clareza e menos dispersão. Que tal dar uma chance a essa poderosa ferramenta?`
+        },
+        'parcerias-locais': {
+            title: 'Fechar Parcerias com Comércios Locais: Fortalecendo a Comunidade, Multiplicando Oportunidades',
+            content: `Conectar-se com o comércio local é mais do que fazer negócios; é construir pontes. Quando você estabelece parcerias, não só expande sua rede e suas possibilidades, mas também contribui para o crescimento da sua própria comunidade. É uma via de mão dupla onde todos ganham: mais visibilidade, novos clientes e um ambiente de negócios mais vibrante e conectado.`
+        },
+        'relacionamento-banco': {
+            title: 'Ter um Bom Relacionamento com o Banco (Pagamentos em Dia): Crédito Aberto, Portas Abertas',
+            content: `Seu relacionamento com o banco é o cartão de visitas para o mundo financeiro. Manter os pagamentos em dia não é só uma questão de organização, é construir uma reputação de confiança que abre portas para investimentos, empréstimos com taxas melhores e oportunidades que você nem imagina. Um bom histórico é seu passaporte para o sucesso financeiro e para a realização de grandes projetos.`
+        },
+        'inovar': {
+            title: 'Sempre Buscar Inovar: O Amanhã Começa Hoje',
+            content: `O mundo não para, e nem você deveria. Buscar inovar é estar sempre um passo à frente, adaptando-se e criando novas soluções para velhos problemas. É sobre não ter medo de experimentar, de aprender com os erros e de transformar ideias em realidade. Inovar é a energia que impulsiona o crescimento pessoal e profissional, mantendo você relevante em qualquer cenário.`
+        },
+        'ia-amiga': {
+            title: 'Ter a IA como Sua Amiga: A Inteligência que Te Impulsiona',
+            content: `A Inteligência Artificial já não é ficção científica, é sua aliada mais poderosa. Usar a IA a seu favor significa otimizar tarefas, ter insights valiosos, automatizar processos e liberar seu tempo para o que realmente importa. Ela não veio para substituir, mas para potencializar suas capacidades, tornando seu trabalho mais eficiente e suas decisões mais assertivas. Que tal começar a explorar esse potencial?`
+        },
+        'falar-nao': {
+            title: 'Saber Falar Não: A Arte de Proteger Seu Tempo e Sua Paz',
+            content: `Dizer "não" pode ser difícil, mas é um ato de autocuidado e de respeito com seus limites. É saber priorizar o que é importante para você, proteger seu tempo e energia, e evitar sobrecargas que só te desgastam. Aprender a negar sem culpa é libertador e essencial para manter seu bem-estar e foco nos seus objetivos.`
+        },
+        'respeito-proximo': {
+            title: 'Aprender Sobre Respeito ao Próximo',
+            content: `Em um mundo cada vez mais diverso, o respeito ao próximo é a bússola que guia nossas interações. Entender e valorizar as diferenças, praticar a empatia e tratar a todos com dignidade não só cria um ambiente mais harmonioso, mas também fortalece laços, abre caminhos e constrói uma sociedade mais justa e acolhedora para todos.`
+        },
+        'direitos': {
+            title: 'Entender Seus Direitos',
+            content: `Conhecer seus direitos é ter o poder de se proteger e de agir com segurança em qualquer situação. Seja como consumidor, cidadão ou profissional, saber o que a lei garante a você é fundamental para evitar abusos, buscar justiça e garantir que suas vontades e necessidades sejam respeitadas. É a base para uma vida com mais autonomia e menos surpresas desagradáveis.`
+        },
+        'ultimas-noticias': {
+            title: 'Estudar as Últimas Notícias',
+            content: `Manter-se informado é estar à frente. Acompanhar as últimas notícias não é apenas sobre saber o que acontece, mas sobre entender as tendências, identificar oportunidades e se preparar para os desafios. É ter uma visão ampla do cenário global e local, permitindo que você tome decisões mais inteligentes e esteja sempre atualizado para o que vier.`
+        }
+    };
+
+    // Expansão animada dos cards de insight
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            if (e.target.classList.contains('saiba-mais-btn')) {
+                e.stopPropagation();
+                // Fecha outros cards
+                document.querySelectorAll('.service-card.expanded').forEach(expandedCard => {
+                    if (expandedCard !== card) {
+                        expandedCard.classList.remove('expanded');
+                        const desc = expandedCard.querySelector('.service-description');
+                        if (desc) {
+                            desc.style.maxHeight = '0';
+                            setTimeout(() => {
+                                if (desc.parentNode) desc.parentNode.removeChild(desc);
+                            }, 300);
+                        }
+                    }
+                });
+                // Se já está expandido, recolhe
+                if (card.classList.contains('expanded')) {
+                    card.classList.remove('expanded');
+                    const desc = card.querySelector('.service-description');
+                    if (desc) {
+                        desc.style.maxHeight = '0';
+                        setTimeout(() => {
+                            if (desc.parentNode) desc.parentNode.removeChild(desc);
+                        }, 300);
+                    }
+                    return;
+                }
+                // Expande o card
+                card.classList.add('expanded');
+                let desc = card.querySelector('.service-description');
+                if (!desc) {
+                    desc = document.createElement('div');
+                    desc.className = 'service-description';
+                    const insightId = card.getAttribute('data-insight');
+                    let content = `<h2 style='color:#FFD700;'>${insightsData[insightId].title}</h2><p style='color:#fff;white-space:pre-line;'>${insightsData[insightId].content}</p>`;
+                    desc.innerHTML = content;
+                    desc.style.maxHeight = '0';
+                    desc.style.overflow = 'hidden';
+                    desc.style.transition = 'max-height 0.4s cubic-bezier(0.4,0,0.2,1)';
+                    card.appendChild(desc);
+                    void desc.offsetWidth;
+                    const scrollHeight = desc.scrollHeight;
+                    desc.style.maxHeight = scrollHeight + 'px';
+                    setTimeout(() => {
+                        if (desc.scrollHeight > 600) {
+                            desc.style.overflow = 'auto';
+                            desc.style.maxHeight = '600px';
+                        }
+                    }, 450);
+                }
+            }
+        });
+    });
+    </script>
+</body>
+</html> 
